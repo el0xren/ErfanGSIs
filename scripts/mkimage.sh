@@ -76,6 +76,7 @@ if [[ -f "$tempdir/file_contexts" ]]; then
     echo "/pds                    u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/fsg                    u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/tombstones             u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
+    echo "/pixelworks             u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/factory                u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/oneplus                u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/oneplus(/.*)?          u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
