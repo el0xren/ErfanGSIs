@@ -1,69 +1,74 @@
 #!/bin/bash
 # Written By @nnippon!, credits for all peeps ofc
-# Kang?, Don't forget to give proper credits!
-# Based on Erfan tools so
+# Don't forget to give proper credits!
+# Based on Erfan tools so use properly
 
-# Define environment dirs
+# Define env
 LOCALDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 extractor="$LOCALDIR/tools/Firmware_extractor/extractor.sh"
-working="$LOCALDIR/work"
-cachedir="$LOCALDIR/cache"
+working="$LOCALDIR/system"
+outdir="$LOCALDIR/cache"
 
-# Let's GO
-echo "Prepare env..."
-	bash update.sh
-	umount -l $working
-	rm -rf $cachedir $working
-	mkdir -p "$cachedir" "$working"
+# Let's start
+echo "Merging Process Started!"
+echo "Initializing..."
+	umount -l $working $outdir 2>/dev/null >> tmp.log
+	rm -rf $working new.img $outdir
+	mkdir -p "$outdir" "$working"
+	bash update.sh 2>/dev/null >> tmp.log
 
-echo "Extracting imgs from OTA..."
-	bash $extractor $1 $cachedir
+echo "Extracting..."
+	bash $extractor $1 $outdir 2>/dev/null >> tmp.log
 
-echo "Creating tmp img..."
-	dd if=/dev/zero of=new.img bs=6k count=1048576
-	mkfs.ext4 new.img
-	tune2fs -c0 -i0 new.img
+echo "Creating temp image..."
+	dd if=/dev/zero of=new.img bs=8k count=1048576 2>/dev/null >> tmp.log
+	mkfs.ext4 new.img 2>/dev/null >> tmp.log
+	tune2fs -c0 -i0 new.img 2>/dev/null >> tmp.log
 
-echo "Merging process started..."
-	echo "system.img"
-	mkdir $cachedir/system
+echo "Merging Partitions..."
+echo "system.img"
+	mkdir $outdir/system
 	mount -o loop new.img $working
-	mount -o ro $cachedir/system.img $cachedir/system
-	cp -vrp $cachedir/system/* $working/ &> /dev/null
+	mount -o ro $outdir/system.img $outdir/system
+	cp -frp $outdir/system/* $working/
 	sync
 
-if [ -f "$cachedir/product.img" ]; then
-	echo "product.img"
-	rm -rf $working/product $working/system/product 
-	mkdir $working/system/product $cachedir/product 
-	mount -o ro $cachedir/product.img $cachedir/product
+if [ -f "$outdir/product.img" ]; then
+echo "product.img"
+	rm -rf $working/product
+	rm -rf $working/system/product
+	mkdir $working/system/product
+	mkdir $outdir/product
+	mount -o ro $outdir/product.img $outdir/product
+	cp -frp $outdir/product/* $working/system/product/
 	ln -s /system/product $working/product
-	cp -vrp $cachedir/product/* $working/system/product/ &> /dev/null
 	sync
 fi
 
-if [ -f "$cachedir/system_ext.img" ]; then
-	echo "system_ext.img"
-	rm -rf $working/system_ext $working/system/system_ext
-	mkdir $working/system/system_ext $cachedir/system_ext
-	mount -o ro $cachedir/system_ext.img $cachedir/system_ext/ 
+if [ -f "$outdir/system_ext.img" ]; then
+echo "system_ext.img"
+	mkdir $outdir/system_ext
+	mount -o ro $outdir/system_ext.img $outdir/system_ext/
+	rm -rf $working/system_ext
+	rm -rf $working/system/system_ext
+	mkdir $working/system/system_ext
+	cp -frp $outdir/system_ext/* $working/system/system_ext/
 	ln -s /system/system_ext $working/system_ext
-	cp -vrp $cachedir/system_ext/* $working/system/system_ext/ &> /dev/n$
 	sync
 fi
 
-if [ -f "$cachedir/reserve.img" ]; then
-	echo "reserve.img"
-	rm -rf $working/system/reserve
-	mkdir $working/system/reserve $cachedir/reserve
-	mount -o ro $cachedir/reserve.img $cachedir/reserve/
-	cp -vrp $cachedir/reserve/* $working/system/reserve/ &> /dev/null
+if [ -f "$outdir/vendor.img" ]; then
+echo "vendor.img"
+	mkdir $outdir/vendor
+	mount -o ro $outdir/vendor.img $outdir/vendor/
+	cp -frp $outdir/vendor/overlay/* $working/system/product/overlay/
 	sync
 fi
 
-echo "Clearing cache..."
-	umount -l $cachedir/*
-	rm -rf $cachedir
-echo "Done!"
+echo "Finalizing..."
+	umount -l $outdir/* 2>/dev/null >> tmp.log
+	rm -rf $outdir tmp.log
 
-# By @nnippon
+echo "Merging Process Done!"
+echo "Continue using make.sh!"
+# by @nnippon
