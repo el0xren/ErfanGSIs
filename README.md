@@ -1,16 +1,22 @@
-## Hi and Welcome to my area!
-Feel free to use but at least gib credits for all peru's that work hard for this to keep alive!  
+# Erfan GSIs OEM's and AOSP Porting Script Project
 
-## Credits
-This repo is just a clone from peru's everywhere  
-Thanks for Erfan Abdi for his OwO tools  
-Thanks for all perus "Jamie, YukoSky, HeliOS, ElytrA8" for all :)  
-Thanks VegaZS for his Java BoboBot  
+### #Credits#
+#### Erfan Abdi: https://github.com/erfanoabdi  
+#### Pierre-Hugues HUSSON: https://github.com/phhusson  
+#### Jamie https://github.com/JamieHoSzeYui  
+#### Xiaoxindada: https://github.com/xiaoxindada  
+#### Velosh: https://github.com/Velosh  
+#### Sheikh Adnan: https://github.com/ElytrA8  
+#### VegaZS: https://github.com/VegaBobo  
+#### HeliOS: https://github.com/issacabraham-git  
+#### Amy: https://github.com/00p513-dev  
+
+### You too, reading this, yes you can Fork this for your use but don't forget credits kek.
 
 ## Downloads "NipponGSIs"
-Download ported GSI's from here!: https://sourceforge.net/projects/nippongsi/files/  
+Download links: https://sourceforge.net/projects/nippongsi/files/  
 Join us in telegram!: https://t.me/nippongsi_support  
-For updates follow here!: https://t.me/nippongsi  
+For updates follow channel: https://t.me/nippongsi  
 
 ## Requirements
     Linux
