@@ -84,6 +84,7 @@ if [[ -f "$tempdir/file_contexts" ]]; then
     echo "/op_odm                 u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/avb                    u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/op_plat_sepolicy.cil   u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
+    echo "/avb/q-gsi.avbpubkey    u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/vgc                    u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/logdump                u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
     echo "/ztecharger             u:object_r:rootfs:s0" >> "$tempdir/file_contexts"
