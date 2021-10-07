@@ -5,6 +5,8 @@ thispath=`cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd`
 
 # Copy changes in system folder
 rsync -ra $thispath/system/ $1/
+# Fix overlays
+cat $thispath/rw-system.add.sh >> $1/bin/rw-system.sh
 
 # Append usefull stuff
 echo "ro.support_one_handed_mode=true" >> $1/build.prop
@@ -27,7 +29,3 @@ echo "ro.com.google.ime.height_ratio=1.0" >> $1/product/etc/build.prop
 sed -i "/dataservice_app/d" $1/product/etc/selinux/product_seapp_contexts
 sed -i "/dataservice_app/d" $1/system_ext/etc/selinux/system_ext_seapp_contexts
 sed -i "/ro.sys.sdcardfs/d" $1/product/etc/build.prop
-
-# Workaround for decrypted issue
-echo "rm -rf /data/system/storage.xml" >> $1/bin/cppreopts.sh
-rm -rf $1/product/etc/security/avb

@@ -76,3 +76,7 @@ echo "debug.sf.high_fps_early_phase_offset_ns=" >> $1/product/etc/build.prop
 echo "debug.sf.high_fps_early_gl_phase_offset_ns=" >> $1/product/etc/build.prop
 echo "debug.sf.high_fps_early_app_phase_offset_ns=" >> $1/product/etc/build.prop
 echo "debug.sf.high_fps_early_gl_app_phase_offset_ns=" >> $1/product/etc/build.prop
+
+# random fix for decryption
+echo "rm -rf /data/system/storage.xml" >> $1/bin/cppreopts.sh
+rm -rf $1/product/etc/security/avb
