@@ -1,0 +1,7 @@
+on property:sys.boot_completed=1
+    start fixdecrypt
+
+service fixdecrypt /system/bin/sh /system/bin/fix_ex_sdcard.sh
+    class main
+    user root
+    group root system
