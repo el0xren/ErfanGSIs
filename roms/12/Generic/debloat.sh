@@ -51,18 +51,6 @@ rm -rf $1/product/priv-app/CarrierServices
 rm -rf $1/system_ext/priv-app/GoogleFeedback
 rm -rf $1/system_ext/priv-app/PixelNfc
 rm -rf $1/app/NfcNci
-rm -rf $1/system_ext/priv-app/YadaYada
-
-# Fix Files-DocumentsUI
-rm -rf $1/product/overlay/PixelDocumentsUIOverlay
-
-# Hotword
-rm -rf $1/product/priv-app/HotwordEnrollment*
-rm -rf $1/system_ext/framework/com.android.hotwordenrollment*
-rm -rf $1/system_ext/framework/oat/arm/com.android.hotwordenrollment*
-rm -rf $1/system_ext/framework/oat/arm64/com.android.hotwordenrollment*
-
-# More debloat
 rm -rf $1/priv-app/TagGoogle
 rm -rf $1/product/app/VZWAPNLib
 rm -rf $1/product/priv-app/AndroidAutoStubPrebuilt
