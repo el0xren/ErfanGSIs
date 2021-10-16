@@ -80,3 +80,6 @@ echo "debug.sf.high_fps_early_gl_app_phase_offset_ns=" >> $1/product/etc/build.p
 # random fix for decryption
 echo "rm -rf /data/system/storage.xml" >> $1/bin/cppreopts.sh
 rm -rf $1/product/etc/security/avb
+
+# Fix dual sim issue in settings 
+echo "persist.sys.fflag.override.settings_provider_model=false" >> $1/build.prop
